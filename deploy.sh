@@ -8,4 +8,5 @@ sudo chown root:weewx /etc/weewx/weewx.conf
 sudo chown root:weewx /etc/weewx/skins/Belchertown/skin.conf 
 sudo chown root:weewx /etc/weewx/skins/Belchertown/graphs.conf 
 sudo chown root:weewx /etc/weewx/bin/user/sdr.py
+sudo systemctl restart weewx
 sudo weectl report run
