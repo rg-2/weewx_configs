@@ -1,0 +1,5 @@
+# ignore secrets
+secrets.sh
+
+# ignore tests folder
+tests/
