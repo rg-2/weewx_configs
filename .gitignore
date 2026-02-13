@@ -3,3 +3,6 @@ secrets.sh
 
 # ignore tests folder
 tests/
+
+# ignore logs
+log.txt
