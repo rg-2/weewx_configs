@@ -1148,7 +1148,8 @@ class getData(SearchList):
                                 else "N/A"
                             )
                             visibility_unit = "miles"
-                        current_obs_icon = current_conditions_data.get("icon", "") or ""
+                        _icon = current_conditions_data.get("icon", "") or ""
+                        current_obs_icon = f"{_icon}.png" if _icon else ""
                         current_obs_summary = (
                             current_conditions_data.get("summary", "") or ""
                         )
