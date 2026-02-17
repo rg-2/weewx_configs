@@ -6,3 +6,7 @@ tests/
 
 # ignore logs
 log.txt
+
+# ignore other  unrelated
+gw1000.py
+ecowitt-gw1100-plan.md
