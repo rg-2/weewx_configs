@@ -2700,10 +2700,35 @@ function showChart(json_file, prepend_renderTo = false) {
                 options.yAxis[this_yAxis].max = s.yAxis_max !== "undefined" ? s.yAxis_max : null;
 
                 // Some charts may require a defined soft min/max on the yAxis
-                options.yAxis[this_yAxis].softMin = s.yAxis_softMin !== "undefined" ? parseInt(s.yAxis_softMin) : null;
-                options.yAxis[this_yAxis].softMax = s.yAxis_softMax !== "undefined" ? parseInt(s.yAxis_softMax) : null;
+                options.yAxis[this_yAxis].softMin = s.yAxis_softMin !== "undefined" ? parseFloat(s.yAxis_softMin) : null;
+                options.yAxis[this_yAxis].softMax = s.yAxis_softMax !== "undefined" ? parseFloat(s.yAxis_softMax) : null;
 
-                // Set the yAxis tick interval. Mostly used for barometer. 
+                // Add plotLines to the yAxis if defined on the series.
+                // Config format in graphs.conf:
+                //   yAxis_plotLine_value = 29.92
+                //   yAxis_plotLine_color = #ff0000
+                //   yAxis_plotLine_width = 1
+                //   yAxis_plotLine_label = Normal
+                //   yAxis_plotLine_dashStyle = Dash
+                if (s.yAxis_plotLine_value) {
+                    if (!options.yAxis[this_yAxis].plotLines) {
+                        options.yAxis[this_yAxis].plotLines = [];
+                    }
+                    options.yAxis[this_yAxis].plotLines.push({
+                        value: parseFloat(s.yAxis_plotLine_value),
+                        color: s.yAxis_plotLine_color || '#ff0000',
+                        width: s.yAxis_plotLine_width ? parseInt(s.yAxis_plotLine_width) : 1,
+                        dashStyle: s.yAxis_plotLine_dashStyle || 'Dash',
+                        zIndex: 3,
+                        label: s.yAxis_plotLine_label ? {
+                            text: s.yAxis_plotLine_label,
+                            align: 'right',
+                            style: { fontSize: '10px', color: s.yAxis_plotLine_color || '#ff0000' }
+                        } : undefined
+                    });
+                }
+
+                // Set the yAxis tick interval. Mostly used for barometer.
                 if (s.yAxis_tickInterval) {
                     options.yAxis[this_yAxis].tickInterval = s.yAxis_tickInterval;
                 }
