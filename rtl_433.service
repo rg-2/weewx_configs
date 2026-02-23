@@ -1,0 +1,12 @@
+[Unit]
+Description=RTL_433 SDR Receiver with MQTT output
+After=network.target mosquitto.service
+Requires=mosquitto.service
+
+[Service]
+ExecStart=/usr/local/bin/rtl_433 -f 915M -F mqtt://localhost:1883 -M utc
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
