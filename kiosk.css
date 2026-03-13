@@ -60,3 +60,12 @@ body {
   margin-left: -0.2em;
 }
 
+/* Override temperature gradient color for readability on kiosk */
+.light .outtemp_outer {
+  color: #333 !important;
+}
+
+.dark .outtemp_outer {
+  color: #eee !important;
+}
+

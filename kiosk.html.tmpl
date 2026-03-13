@@ -10,6 +10,18 @@
     #include "header.html.tmpl"
     <!-- end of header -->
 
+<script>
+    // Kiosk: zoom out to fit 1280px layout on smaller screens
+    (function() {
+        var targetWidth = 1280;
+        var screenWidth = window.screen.width;
+        if (screenWidth < targetWidth) {
+            var scale = screenWidth / targetWidth;
+            document.querySelector('meta[name="viewport"]').setAttribute('content',
+                'width=' + targetWidth + ', initial-scale=' + scale + ', user-scalable=no');
+        }
+    })();
+</script>
 <script type='text/javascript' src='$relative_url/kiosk-extras.js?ver=#echo int( time.time() ) #'></script>
 
 <script type="text/javascript">
@@ -146,23 +158,6 @@
                     jQuery(".kiosk-graph-outer").append('<div class="col-sm-6" style="height:300px;padding:0 15px;"><div id="' + graphID + '" style="width:100%;height:100%;"></div></div>');
                 });
                 showChart("kiosk");
-                // Debug: log layout measurements
-                setTimeout(function() {
-                    var vh = window.innerHeight;
-                    var footer = jQuery(".site-footer");
-                    var footerTop = footer.length ? footer.offset().top : "N/A";
-                    var footerHeight = footer.length ? footer.outerHeight() : "N/A";
-                    var row2 = jQuery(".kiosk-second-row");
-                    var row2Top = row2.length ? row2.offset().top : "N/A";
-                    var row2Height = row2.length ? row2.outerHeight() : "N/A";
-                    console.log("KIOSK DEBUG: viewport=" + vh + "px, footerTop=" + footerTop + "px, footerHeight=" + footerHeight + "px, row2Top=" + row2Top + "px, row2Height=" + row2Height + "px");
-                    kioskGraphs.forEach(function(graphID) {
-                        var el = jQuery("#" + graphID);
-                        var parent = el.parent();
-                        var svg = el.find("svg");
-                        console.log("KIOSK DEBUG: " + graphID + " - parentHeight=" + parent.outerHeight() + "px, divHeight=" + el.outerHeight() + "px, svgHeight=" + (svg.length ? svg.attr("height") || svg[0].getBoundingClientRect().height : "N/A") + "px, bottomEdge=" + (el.offset().top + el.outerHeight()) + "px");
-                    });
-                }, 2000);
             } catch (err) {
                 console.log("ERROR: Cannot add kiosk graphs: " + err.message);
             }
@@ -236,21 +231,6 @@
                                         #if $Extras.has_key("aqi_location_enabled") and $Extras.aqi_location_enabled == '1'
                                         <span class="aqi_location_outer"><br>$aqi_location</span>
                                         #end if
-                                    </div>
-                                    #else
-                                    <div class="stn-high-low station-observations">
-                                        <table class="stn-high-low-table">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="stn-high-low-table-title">$obs.label.inTemp</td>
-                                                    <td class="stn-high-low-table-title border-left">$obs.label.inHumidity</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="inTemp">$current.inTemp</span></td>
-                                                    <td class="border-left"><span class="inHumidity">$current.inHumidity</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
                                     #end if
                                 </div>

@@ -13,3 +13,6 @@ ecowitt-gw1100-plan.md
 
 # ignore temp folder
 tmp/
+
+#ignore screenshots
+screenshots/
