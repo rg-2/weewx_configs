@@ -18,6 +18,7 @@ body {
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+  padding: 0 !important;
 }
 
 .site-container {
@@ -27,13 +28,30 @@ body {
 
 .site-inner {
   margin-bottom: 0;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+  max-width: 100% !important;
+}
+
+/* Collapse doubled borders between adjacent grid cells:
+   The theme uses .border-left and .border-right utility classes,
+   which double up where two cells meet. Remove the left border
+   from cells that already have a neighbor's right border. */
+.current-almanac.border-left {
+  border-left: none !important;
 }
 
 /* Adjust column widths: shrink temp/wind, widen observations */
 .temperature-row > .col-lg-4 {
   width: 30%;
+  overflow: hidden;
+  padding-left: 5px !important;
+}
+
+/* Align the temp/wind divider with the obs/sun-moon divider */
+.stn-high-low {
+  padding-top: 5px !important;
+  margin-bottom: -6px;
 }
 
 .current-almanac.col-lg-3 {
@@ -55,11 +73,36 @@ body {
 
 .forecast-conditions {
   min-height: 150px;
+  font-size: 1.2em;
 }
 
 .forecast-conditions-1hour {
   min-height: 144px;
   word-wrap: break-word;
+}
+
+/* Scale up 3-day forecast for kiosk */
+.forecast-day {
+  font-size: 1.4em;
+}
+
+.forecast-day .forecast-high,
+.forecast-day .forecast-low {
+  font-size: 30px !important;
+}
+
+.forecast-day .forecast-precip,
+.forecast-day .forecast-wind {
+  font-size: 20px !important;
+}
+
+.forecast-day .forecast-conditions img {
+  width: 85px !important;
+  height: auto !important;
+}
+
+.forecast-day .forecast-condition-text {
+  font-size: 16px !important;
 }
 
 .moon {
@@ -102,6 +145,53 @@ body {
 
 .current-almanac .weather-obs-bottom .moon table {
   font-size: inherit;
+}
+
+/* Larger main temperature for kiosk readability */
+.current_temp .outtemp_outer {
+  font-size: 72px !important;
+}
+
+/* Match moon phase text and icon to observation font size */
+.moon-container {
+  font-size: 20px !important;
+}
+
+.moon-icon {
+  font-size: 24px !important;
+}
+
+.moon-visible {
+  padding-left: 10px;
+}
+
+/* More space between mph label and wind run */
+.dailywindrun,
+.wind-table td[style*="padding-top"] {
+  padding-top: 15px !important;
+}
+
+/* Match high/low temp and wind run to observation font size */
+.stn-high-low-table {
+  font-size: 1.4em;
+}
+
+.wind-table {
+  font-size: 1.4em;
+}
+
+/* Larger feels-like text */
+.feelslike {
+  font-size: 24px !important;
+  white-space: nowrap;
+  text-align: left !important;
+  margin-left: -15px;
+}
+
+/* Larger Y-axis and X-axis labels on charts */
+.highcharts-yaxis-labels text,
+.highcharts-xaxis-labels text {
+  font-size: 14px !important;
 }
 
 /* Override Highcharts graph title color for readability on kiosk */
