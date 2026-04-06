@@ -27,6 +27,22 @@ body {
 
 .site-inner {
   margin-bottom: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* Adjust column widths: shrink temp/wind, widen observations */
+.temperature-row > .col-lg-4 {
+  width: 30%;
+}
+
+.current-almanac.col-lg-3 {
+  width: 31.34%;
+}
+
+.radar-map.col-lg-5 {
+  width: 38.66%;
+  text-align: left;
 }
 
 .site-footer {
@@ -67,5 +83,33 @@ body {
 
 .dark .outtemp_outer {
   color: #eee !important;
+}
+
+/* Larger font for station observations on kiosk */
+.station-observations table {
+  font-size: 1.4em;
+}
+
+.station-observations table td {
+  white-space: nowrap;
+}
+
+/* Match Sun & Moon values to observation font size */
+.current-almanac .weather-obs-bottom .small-almanac {
+  font-size: 1.4em;
+  white-space: nowrap;
+}
+
+.current-almanac .weather-obs-bottom .moon table {
+  font-size: inherit;
+}
+
+/* Override Highcharts graph title color for readability on kiosk */
+.light .highcharts-title a {
+  color: #000 !important;
+}
+
+.dark .highcharts-title a {
+  color: #fff !important;
 }
 
